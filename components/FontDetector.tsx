@@ -11,7 +11,14 @@ export default function FontDetector() {
   const [textInput, setTextInput] = useState("");
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   interface FontDetectionResult {
-    detectedFonts: { name: string; confidence: number }[];
+    detectedFonts: {
+      name: string;
+      confidence: number;
+      properties: {
+        weight: string;
+        style: string;
+      };
+    }[];
     reasoning?: string;
   }
 
@@ -90,7 +97,7 @@ export default function FontDetector() {
         }
       }
 
-      const response = await fetch("/api/detect-font", {
+      const response = await fetch("/api/finder", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -188,6 +195,8 @@ export default function FontDetector() {
                     src={imagePreview}
                     alt="Preview"
                     className="max-h-64 max-w-full mx-auto rounded-lg"
+                    width={30}
+                    height={30}
                   />
                   <button
                     onClick={() => setImagePreview(null)}

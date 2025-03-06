@@ -1,6 +1,5 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
-// Initializes the Generative AI API with the provided API key
 export function initializeGeminiAI() {
   const apiKey = process.env.GEMINI_API_KEY;
 
@@ -12,10 +11,10 @@ export function initializeGeminiAI() {
 }
 
 // Detects fonts from text using Gemini AI
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export async function detectFontFromText(text: any) {
+export async function detectFontFromText(text) {
   const genAI = initializeGeminiAI();
-  const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+  // Use the newer gemini-1.5-flash model
+  const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
   const prompt = `
   Analyze the following text and identify the font that was likely used.
@@ -62,16 +61,14 @@ export async function detectFontFromText(text: any) {
   }
 }
 
-// Detects fonts from an image using Gemini AI
-export async function detectFontFromImage(imageData: string) {
+export async function detectFontFromImage(imageData) {
   const genAI = initializeGeminiAI();
-  const model = genAI.getGenerativeModel({ model: "gemini-pro-vision" });
 
-  // Parse the base64 image data
+  const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+
   const base64Data = imageData.split(",")[1];
   const mimeType = imageData.split(";")[0].split(":")[1];
 
-  // Create image part for the model
   const imagePart = {
     inlineData: {
       data: base64Data,
