@@ -16,7 +16,7 @@ Font Finder is a powerful web application that helps you identify fonts from ima
 
 ## Screenshots
 
-![Image Input Mode](fonts\public\fontfinder.png)
+![Image Input Mode](/fonts/public/fontfinder.png)
 _Image analysis mode with drag-and-drop functionality_
 
 ## Getting Started
